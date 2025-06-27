@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Карта путешествий Клима</title>
-    <link rel="icon" type="image/x-icon" href="favicon-new.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <style>
         html, body, #map {
@@ -40,12 +41,18 @@
        🍼 Родился здесь — <strong>21.02.2025</strong></p>
     <p class="location-link" onclick="focusPlacemark('home')">🏠 <strong>Саратов, Славянская площадь, д. 2, кв. 224</strong><br>
        🏡 Живёт здесь с <strong>23.02.2025</strong> по настоящее время</p>
-	<p class="location-link" onclick="focusPlacemark('penza_zoo')">🦁 <strong>Пенза, Пензенский зоопарк</strong><br>
-       📅 Посещение <strong>12.06.2025</strong></p>
+    <p class="location-link" onclick="focusPlacemark('penza_zoo')">🦁 <strong>Пенза, Пензенский зоопарк</strong><br>
+       📅 Посещение <strong>22.06.2025</strong></p>
+    <p class="location-link" onclick="focusPlacemark('syzran')">🍲 <strong>Сызрань, обед по пути на турбазу</strong><br>
+       📅 Заезд — <strong>22.06.2025</strong></p>
+    <p class="location-link" onclick="focusPlacemark('kislorod')">🏕 <strong>Турбаза "Кислород"</strong><br>
+       🌿 Отдых с <strong>22 по 24 июня 2025</strong></p>
+    <p class="location-link" onclick="focusPlacemark('samara')">🌇 <strong>Самара</strong><br>
+       🚤 Провели время с <strong>24 по 26 июня 2025</strong></p>
 </div>
 <div id="map"></div>
 <script type="text/javascript">
-    let myMap, birthPlacemark, homePlacemark;
+    let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark;
 
     ymaps.ready(init);
     function init(){
@@ -57,48 +64,56 @@
 
         birthPlacemark = new ymaps.Placemark([51.578517, 45.955537], {
             hintContent: 'Саратов, роддом',
-            balloonContent: '<strong>Клим родился здесь</strong><br>1-я Одесская, 46Ak2 — 21 февраля 2025<br><a href="https://disk.yandex.ru/i/0whbQqiY9SfmYA" target="_blank" class="photo-link">📷 Фото</a><br><a href="https://disk.yandex.ru/i/9b5Q5YqvdQ90CQ" target="_blank" class="photo-link">📷 Фото </a>'
-        }, {
-            preset: 'islands#redIcon'
-        });
+            balloonContent: '<strong>Клим родился здесь</strong><br>1-я Одесская, 46Ak2 — 21 февраля 2025<br><a href="https://disk.yandex.ru/i/0whbQqiY9SfmYA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/9b5Q5YqvdQ90CQ" target="_blank">📷 Фото </a>'
+        }, { preset: 'islands#redIcon' });
 
         homePlacemark = new ymaps.Placemark([51.529461, 46.063865], {
             hintContent: 'Дом Клима',
-            balloonContent: '<strong>Клим живёт здесь</strong><br>Славянская пл., д. 2, кв. 224<br>с 23 февраля 2025 года по настоящее время<br><a href="https://disk.yandex.ru/i/WIQDYY55IgWdNw" target="_blank" class="photo-link">📷 Фото</a>'
-        }, {
-            preset: 'islands#blueIcon'
-        });
-		penzaZooPlacemark = new ymaps.Placemark([53.175703, 45.002947], {
+            balloonContent: '<strong>Клим живёт здесь</strong><br>Славянская пл., д. 2, кв. 224<br>с 23 февраля 2025 года<br><a href="https://disk.yandex.ru/i/WIQDYY55IgWdNw" target="_blank">📷 Фото</a>'
+        }, { preset: 'islands#blueIcon' });
+
+        penzaZooPlacemark = new ymaps.Placemark([53.175703, 45.002947], {
             hintContent: 'Пензенский зоопарк',
-            balloonContent: '<strong>Клим посетил Пензенский зоопарк</strong><br>12 июня 2025 года<br><a href="https://disk.yandex.ru/i/mYxwb2Zkn_X5gg" target="_blank" class="photo-link">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Qb7utCNMSeYXHw" target="_blank" class="photo-link">📷 Фото</a><br><a href="https://disk.yandex.ru/i/R3WA06CGgA5Obw" target="_blank" class="photo-link">📷 Фото </a>'
-        }, {
-            preset: 'islands#greenIcon'
-        });
+            balloonContent: '<strong>Клим посетил Пензенский зоопарк</strong><br>12 июня 2025 года<br><a href="https://disk.yandex.ru/i/mYxwb2Zkn_X5gg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Qb7utCNMSeYXHw" target="_blank">📷 Фото</a>'
+        }, { preset: 'islands#greenIcon' });
+
+        syzranPlacemark = new ymaps.Placemark([53.122451, 48.405439], {
+            hintContent: 'Сызрань, обед',
+            balloonContent: '<strong>Заехали пообедать в Сызрань</strong><br>22 июня 2025 года<br><a href="https://disk.yandex.ru/i/OIQ2BRz_x6g16g" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/5OrUcGtM9exuMw" target="_blank">📷 Фото </a>'
+        }, { preset: 'islands#orangeIcon' });
+
+        kislorodPlacemark = new ymaps.Placemark([53.440137, 50.061717], {
+            hintContent: 'Турбаза "Кислород"',
+            balloonContent: '<strong>Отдых на турбазе "Кислород"</strong><br>С 22 по 24 июня 2025 года<br><a href="https://disk.yandex.ru/i/H_6uYdlorbDMHw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/VqSMNkZhkHRUAA" target="_blank">📷 Фото</a>'
+        }, { preset: 'islands#violetIcon' });
+
+        samaraPlacemark = new ymaps.Placemark([53.190208, 50.086065], {
+            hintContent: 'Самара',
+            balloonContent: '<strong>Провели замечательные дни в Самаре</strong><br>С 24 по 26 июня 2025 года<br><a href="https://disk.yandex.ru/i/TXAVYF8px0O2Ug" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Q5ClGBqpQd_U8A" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/pWc7at3cKQgppA" target="_blank">📷 Фото</a>'
+        }, { preset: 'islands#brownIcon' });
 
         myMap.geoObjects.add(birthPlacemark);
         myMap.geoObjects.add(homePlacemark);
-		myMap.geoObjects.add(penzaZooPlacemark);
+        myMap.geoObjects.add(penzaZooPlacemark);
+        myMap.geoObjects.add(syzranPlacemark);
+        myMap.geoObjects.add(kislorodPlacemark);
+        myMap.geoObjects.add(samaraPlacemark);
     }
 
     function focusPlacemark(type) {
-        let target, coords, zoom;
-        if (type === 'birth') {
-            target = birthPlacemark;
-            coords = [51.578517, 45.955537];
-            zoom = 17;
-        } else if (type === 'home') {
-            target = homePlacemark;
-            coords = [51.529461, 46.063865];
-            zoom = 17;
-		} else if (type === 'penza_zoo') {
-            target = penzaZooPlacemark;
-            coords = [53.175703, 45.002947];
-            zoom = 17;
-        }
+        const targets = {
+            birth: { placemark: birthPlacemark, coords: [51.578517, 45.955537] },
+            home: { placemark: homePlacemark, coords: [51.529461, 46.063865] },
+            penza_zoo: { placemark: penzaZooPlacemark, coords: [53.175703, 45.002947] },
+            syzran: { placemark: syzranPlacemark, coords: [53.122451, 48.405439] },
+            kislorod: { placemark: kislorodPlacemark, coords: [53.440137, 50.061717] },
+            samara: { placemark: samaraPlacemark, coords: [53.190208, 50.086065] }
+        };
+        const target = targets[type];
         if (target) {
-            target.balloon.close();
-            myMap.setCenter(coords, zoom, { duration: 500 });
-            setTimeout(() => target.balloon.open(), 500);
+            target.placemark.balloon.close();
+            myMap.setCenter(target.coords, 17, { duration: 500 });
+            setTimeout(() => target.placemark.balloon.open(), 500);
         }
     }
 </script>
