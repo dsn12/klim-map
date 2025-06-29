@@ -42,17 +42,19 @@
     <p class="location-link" onclick="focusPlacemark('home')">🏠 <strong>Саратов, Славянская площадь, д. 2, кв. 224</strong><br>
        🏡 Живёт здесь с <strong>23.02.2025</strong> по настоящее время</p>
     <p class="location-link" onclick="focusPlacemark('penza_zoo')">🦁 <strong>Пенза, Пензенский зоопарк</strong><br>
-       📅 Посещение <strong>22.06.2025</strong></p>
+       📅 Посещение <strong>12.06.2025</strong></p>
     <p class="location-link" onclick="focusPlacemark('syzran')">🍲 <strong>Сызрань, обед по пути на турбазу</strong><br>
        📅 Заезд — <strong>22.06.2025</strong></p>
     <p class="location-link" onclick="focusPlacemark('kislorod')">🏕 <strong>Турбаза "Кислород"</strong><br>
        🌿 Отдых с <strong>22 по 24 июня 2025</strong></p>
     <p class="location-link" onclick="focusPlacemark('samara')">🌇 <strong>Самара</strong><br>
        🚤 Провели время с <strong>24 по 26 июня 2025</strong></p>
+    <p class="location-link" onclick="focusPlacemark('baptism')">⛪ <strong>Крещение Клима</strong><br>
+       ✨ Таинство прошло <strong>29.06.2025</strong></p>
 </div>
 <div id="map"></div>
 <script type="text/javascript">
-    let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark;
+    let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark;
 
     ymaps.ready(init);
     function init(){
@@ -92,12 +94,18 @@
             balloonContent: '<strong>Провели замечательные дни в Самаре</strong><br>С 24 по 26 июня 2025 года<br><a href="https://disk.yandex.ru/i/TXAVYF8px0O2Ug" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Q5ClGBqpQd_U8A" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/pWc7at3cKQgppA" target="_blank">📷 Фото</a>'
         }, { preset: 'islands#brownIcon' });
 
+        baptismPlacemark = new ymaps.Placemark([51.462245, 45.934426], {
+            hintContent: 'Крещение Клима',
+            balloonContent: '<strong>Крестины Клима</strong><br>29 июня 2025 года — важный духовный день<br><a href="https://disk.yandex.ru/i/n0WvaTlwdjDUWw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/swDuCTGdgTCg5w" target="_blank">📷 Фото</a>'
+        }, { preset: 'islands#darkGreenIcon' });
+
         myMap.geoObjects.add(birthPlacemark);
         myMap.geoObjects.add(homePlacemark);
         myMap.geoObjects.add(penzaZooPlacemark);
         myMap.geoObjects.add(syzranPlacemark);
         myMap.geoObjects.add(kislorodPlacemark);
         myMap.geoObjects.add(samaraPlacemark);
+        myMap.geoObjects.add(baptismPlacemark);
     }
 
     function focusPlacemark(type) {
@@ -107,7 +115,8 @@
             penza_zoo: { placemark: penzaZooPlacemark, coords: [53.175703, 45.002947] },
             syzran: { placemark: syzranPlacemark, coords: [53.122451, 48.405439] },
             kislorod: { placemark: kislorodPlacemark, coords: [53.440137, 50.061717] },
-            samara: { placemark: samaraPlacemark, coords: [53.190208, 50.086065] }
+            samara: { placemark: samaraPlacemark, coords: [53.190208, 50.086065] },
+            baptism: { placemark: baptismPlacemark, coords: [51.462245, 45.934426] }
         };
         const target = targets[type];
         if (target) {
