@@ -1,7 +1,3 @@
-from pathlib import Path
-
-# HTML with the two new placemarks added for Kamyshin and Volgograd.
-updated_html = """
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -40,120 +36,167 @@ updated_html = """
 <body>
 <div id="title">
     <h2>🌍 Путешествия Клима</h2>
+
     <p class="location-link" onclick="focusPlacemark('birth')">📍 <strong>Саратов, роддом №4 на 1-й Одесской</strong><br>
        🍼 Родился здесь — <strong>21.02.2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('home')">🏠 <strong>Саратов, Славянская площадь, д. 2, кв. 224</strong><br>
        🏡 Живёт здесь с <strong>23.02.2025</strong> по настоящее время</p>
+
     <p class="location-link" onclick="focusPlacemark('penza_zoo')">🦁 <strong>Пенза, Пензенский зоопарк</strong><br>
        📅 Посещение <strong>12.06.2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('syzran')">🍲 <strong>Сызрань, обед по пути на турбазу</strong><br>
        📅 Заезд — <strong>22.06.2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('kislorod')">🏕 <strong>Турбаза "Кислород"</strong><br>
        🌿 Отдых с <strong>22 по 24 июня 2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('samara')">🌇 <strong>Самара</strong><br>
        🚤 Провели время с <strong>24 по 26 июня 2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('baptism')">⛪ <strong>Крещение Клима</strong><br>
        ✨ Таинство прошло <strong>29.06.2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('kamyshin')">🥞 <strong>Камышин, кафе БлинБерри</strong><br>
        🚗 Обед по дороге в Волгоград — <strong>28.08.2025</strong></p>
+
     <p class="location-link" onclick="focusPlacemark('volgograd')">🏙 <strong>Волгоград</strong><br>
        🎉 Провели 3 весёлых дня — <strong>28–31.08.2025</strong></p>
+
+    <p class="location-link" onclick="focusPlacemark('first_train_trip')">🚆 <strong>Первое путешествие Клима на поезде</strong><br>
+       ✨ Саратов — Санкт-Петербург, <strong>01.04.2026</strong></p>
+
+    <p class="location-link" onclick="focusPlacemark('rtischevo')">🚉 <strong>Ртищево, станция</strong><br>
+       ✨ Остановка в пути — <strong>01.04.2026</strong></p>
+
+    <p class="location-link" onclick="focusPlacemark('spb_april_2026')">🏙 <strong>Санкт-Петербург</strong><br>
+       ✨ Две насыщенные недели в городе — <strong>02–16.04.2026</strong></p>
+
+    <p class="location-link" onclick="focusPlacemark('michurinsk')">🚉 <strong>Мичуринск, станция</strong><br>
+       ✨ Остановка на обратном пути — <strong>17.04.2026</strong></p>
+
 </div>
+
 <div id="map"></div>
+
 <script type="text/javascript">
-    let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark, kamyshinPlacemark, volgogradPlacemark;
 
-    ymaps.ready(init);
-    function init(){
-        myMap = new ymaps.Map("map", {
-            center: [51.554, 46.01],
-            zoom: 13,
-            controls: ['zoomControl', 'fullscreenControl']
-        });
+let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark, kamyshinPlacemark, volgogradPlacemark, firstTrainTripPlacemark, rtischevoPlacemark, spbApril2026Placemark, michurinskPlacemark;
 
-        birthPlacemark = new ymaps.Placemark([51.578517, 45.955537], {
-            hintContent: 'Саратов, роддом',
-            balloonContent: '<strong>Клим родился здесь</strong><br>1-я Одесская, 46Ak2 — 21 февраля 2025<br><a href="https://disk.yandex.ru/i/0whbQqiY9SfmYA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/9b5Q5YqvdQ90CQ" target="_blank">📷 Фото </a>'
-        }, { preset: 'islands#redIcon' });
+ymaps.ready(init);
 
-        homePlacemark = new ymaps.Placemark([51.529461, 46.063865], {
-            hintContent: 'Дом Клима',
-            balloonContent: '<strong>Клим живёт здесь</strong><br>Славянская пл., д. 2, кв. 224<br>с 23 февраля 2025 года<br><a href="https://disk.yandex.ru/i/WIQDYY55IgWdNw" target="_blank">📷 Фото</a>'
-        }, { preset: 'islands#blueIcon' });
+function init(){
+    myMap = new ymaps.Map("map", {
+        center: [51.554, 46.01],
+        zoom: 13,
+        controls: ['zoomControl', 'fullscreenControl']
+    });
 
-        penzaZooPlacemark = new ymaps.Placemark([53.175703, 45.002947], {
-            hintContent: 'Пензенский зоопарк',
-            balloonContent: '<strong>Клим посетил Пензенский зоопарк</strong><br>12 июня 2025 года<br><a href="https://disk.yandex.ru/i/mYxwb2Zkn_X5gg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Qb7utCNMSeYXHw" target="_blank">📷 Фото</a>'
-        }, { preset: 'islands#greenIcon' });
+    birthPlacemark = new ymaps.Placemark([51.578517, 45.955537], {
+        hintContent: 'Саратов, роддом',
+        balloonContent: '<strong>Клим родился здесь</strong><br>1-я Одесская, 46Ak2 — 21 февраля 2025<br><a href="https://disk.yandex.ru/i/0whbQqiY9SfmYA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/9b5Q5YqvdQ90CQ" target="_blank">📷 Фото </a>'
+    }, { preset: 'islands#redIcon' });
 
-        syzranPlacemark = new ymaps.Placemark([53.122451, 48.405439], {
-            hintContent: 'Сызрань, обед',
-            balloonContent: '<strong>Заехали пообедать в Сызрань</strong><br>22 июня 2025 года<br><a href="https://disk.yandex.ru/i/OIQ2BRz_x6g16g" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/5OrUcGtM9exuMw" target="_blank">📷 Фото </a>'
-        }, { preset: 'islands#orangeIcon' });
+    homePlacemark = new ymaps.Placemark([51.529461, 46.063865], {
+        hintContent: 'Дом Клима',
+        balloonContent: '<strong>Клим живёт здесь</strong><br>Славянская пл., д. 2, кв. 224<br>с 23 февраля 2025 года<br><a href="https://disk.yandex.ru/i/WIQDYY55IgWdNw" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#blueIcon' });
 
-        kislorodPlacemark = new ymaps.Placemark([53.440137, 50.061717], {
-            hintContent: 'Турбаза "Кислород"',
-            balloonContent: '<strong>Отдых на турбазе "Кислород"</strong><br>С 22 по 24 июня 2025 года<br><a href="https://disk.yandex.ru/i/H_6uYdlorbDMHw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/VqSMNkZhkHRUAA" target="_blank">📷 Фото</a>'
-        }, { preset: 'islands#violetIcon' });
+    penzaZooPlacemark = new ymaps.Placemark([53.175703, 45.002947], {
+        hintContent: 'Пензенский зоопарк',
+        balloonContent: '<strong>Клим посетил Пензенский зоопарк</strong><br>12 июня 2025 года<br><a href="https://disk.yandex.ru/i/mYxwb2Zkn_X5gg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Qb7utCNMSeYXHw" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#greenIcon' });
 
-        samaraPlacemark = new ymaps.Placemark([53.190208, 50.086065], {
-            hintContent: 'Самара',
-            balloonContent: '<strong>Провели замечательные дни в Самаре</strong><br>С 24 по 26 июня 2025 года<br><a href="https://disk.yandex.ru/i/TXAVYF8px0O2Ug" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Q5ClGBqpQd_U8A" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/pWc7at3cKQgppA" target="_blank">📷 Фото</a>'
-        }, { preset: 'islands#brownIcon' });
+    syzranPlacemark = new ymaps.Placemark([53.122451, 48.405439], {
+        hintContent: 'Сызрань, обед',
+        balloonContent: '<strong>Заехали пообедать в Сызрань</strong><br>22 июня 2025 года<br><a href="https://disk.yandex.ru/i/OIQ2BRz_x6g16g" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/5OrUcGtM9exuMw" target="_blank">📷 Фото </a>'
+    }, { preset: 'islands#orangeIcon' });
 
-        baptismPlacemark = new ymaps.Placemark([51.462245, 45.934426], {
-            hintContent: 'Крещение Клима',
-            balloonContent: '<strong>Крестины Клима</strong><br>29 июня 2025 года — важный духовный день<br><a href="https://disk.yandex.ru/i/n0WvaTlwdjDUWw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/swDuCTGdgTCg5w" target="_blank">📷 Фото</a>'
-        }, { preset: 'islands#darkGreenIcon' });
+    kislorodPlacemark = new ymaps.Placemark([53.440137, 50.061717], {
+        hintContent: 'Турбаза "Кислород"',
+        balloonContent: '<strong>Отдых на турбазе "Кислород"</strong><br>С 22 по 24 июня 2025 года<br><a href="https://disk.yandex.ru/i/H_6uYdlorbDMHw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/VqSMNkZhkHRUAA" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#violetIcon' });
 
-        kamyshinPlacemark = new ymaps.Placemark([50.079876, 45.403518], {
-            hintContent: 'Кафе БлинБерри, Камышин',
-            balloonContent: '<strong>Остановились перекусить в кафе "БлинБерри"</strong><br>Камышин — 28 августа 2025 года<br>Без фото, но очень вкусно 🥞'
-        }, { preset: 'islands#yellowIcon' });
+    samaraPlacemark = new ymaps.Placemark([53.190208, 50.086065], {
+        hintContent: 'Самара',
+        balloonContent: '<strong>Провели замечательные дни в Самаре</strong><br>С 24 по 26 июня 2025 года<br><a href="https://disk.yandex.ru/i/TXAVYF8px0O2Ug" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Q5ClGBqpQd_U8A" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/pWc7at3cKQgppA" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#brownIcon' });
 
-        volgogradPlacemark = new ymaps.Placemark([48.699137, 44.495501], {
-            hintContent: 'Волгоград',
-            balloonContent: '<strong>Три весёлых дня в Волгограде!</strong><br>С 28 по 31 августа 2025 года<br><a href="https://disk.yandex.ru/i/Lj74N-KMSb0L5w" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/iV3K79xRLWYTmA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/7yKvEqyvgw5KCA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/4at2hDLW8scM6A" target="_blank">📷 Фото</a>'
-        }, { preset: 'islands#pinkIcon' });
+    baptismPlacemark = new ymaps.Placemark([51.462245, 45.934426], {
+        hintContent: 'Крещение Клима',
+        balloonContent: '<strong>Крестины Клима</strong><br>29 июня 2025 года — важный духовный день<br><a href="https://disk.yandex.ru/i/n0WvaTlwdjDUWw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/swDuCTGdgTCg5w" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#darkGreenIcon' });
 
-        myMap.geoObjects
-            .add(birthPlacemark)
-            .add(homePlacemark)
-            .add(penzaZooPlacemark)
-            .add(syzranPlacemark)
-            .add(kislorodPlacemark)
-            .add(samaraPlacemark)
-            .add(baptismPlacemark)
-            .add(kamyshinPlacemark)
-            .add(volgogradPlacemark);
+    kamyshinPlacemark = new ymaps.Placemark([50.079876, 45.403518], {
+        hintContent: 'Кафе БлинБерри, Камышин',
+        balloonContent: '<strong>Остановились перекусить в кафе "БлинБерри"</strong><br>Камышин — 28 августа 2025 года<br>Без фото, но очень вкусно 🥞'
+    }, { preset: 'islands#yellowIcon' });
+
+    volgogradPlacemark = new ymaps.Placemark([48.699137, 44.495501], {
+        hintContent: 'Волгоград',
+        balloonContent: '<strong>Три весёлых дня в Волгограде!</strong><br>С 28 по 31 августа 2025 года<br><a href="https://disk.yandex.ru/i/Lj74N-KMSb0L5w" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/iV3K79xRLWYTmA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/7yKvEqyvgw5KCA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/4at2hDLW8scM6A" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#pinkIcon' });
+
+    firstTrainTripPlacemark = new ymaps.Placemark([51.542137, 45.998323], {
+        hintContent: 'Первое путешествие Клима на поезде',
+        balloonContent: '<strong>Первое путешествие Клима на поезде</strong><br>🚆 Дорога из Саратова в Санкт-Петербург — первые впечатления и начало настоящих путешествий<br>1 апреля 2026 года<br><a href="https://disk.yandex.ru/i/wibbNvJXFmyEOg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/ukew5SHehuB4lg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/q4RyxBRPvXmoyg" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#nightIcon' });
+
+    rtischevoPlacemark = new ymaps.Placemark([52.260630, 43.788322], {
+        hintContent: 'Ртищево, станция',
+        balloonContent: '<strong>Остановка в Ртищево</strong><br>🚉 Короткая прогулка на площади станции по пути в Санкт-Петербург<br>1 апреля 2026 года<br><a href="https://disk.yandex.ru/i/qaNZLbxyruWFDg" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#orangeIcon' });
+
+    spbApril2026Placemark = new ymaps.Placemark([59.985777, 30.320230], {
+        hintContent: 'Санкт-Петербург',
+        balloonContent: '<strong>Две недели в Санкт-Петербурге</strong><br>🏙 Насыщенные дни: квартира, прогулки, любимые места и первое знакомство Клима с будущим районом<br>Со 2 по 16 апреля 2026 года<br><a href="https://disk.yandex.ru/i/B9ykS47UbWVvGQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/jm4eMXVrhNJyqA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/-gdboY2ejBflXQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/zhh2Sc2QL99qYg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/rw8rW0zYsEIhVQ" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#darkBlueIcon' });
+
+    michurinskPlacemark = new ymaps.Placemark([52.898243, 40.496938], {
+        hintContent: 'Мичуринск, станция',
+        balloonContent: '<strong>Остановка в Мичуринске</strong><br>🚉 Небольшая прогулка на станции по пути в Саратов из Санкт-Петербурга<br>17 апреля 2026 года<br><a href="https://disk.yandex.ru/i/IthjjBs9IgSTDQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/ESA5P3rpJDsbaQ" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#orangeIcon' });
+
+    myMap.geoObjects
+        .add(birthPlacemark)
+        .add(homePlacemark)
+        .add(penzaZooPlacemark)
+        .add(syzranPlacemark)
+        .add(kislorodPlacemark)
+        .add(samaraPlacemark)
+        .add(baptismPlacemark)
+        .add(kamyshinPlacemark)
+        .add(volgogradPlacemark)
+        .add(firstTrainTripPlacemark)
+        .add(rtischevoPlacemark)
+        .add(spbApril2026Placemark)
+        .add(michurinskPlacemark);
+}
+
+function focusPlacemark(type) {
+    const targets = {
+        birth: { placemark: birthPlacemark, coords: [51.578517, 45.955537] },
+        home: { placemark: homePlacemark, coords: [51.529461, 46.063865] },
+        penza_zoo: { placemark: penzaZooPlacemark, coords: [53.175703, 45.002947] },
+        syzran: { placemark: syzranPlacemark, coords: [53.122451, 48.405439] },
+        kislorod: { placemark: kislorodPlacemark, coords: [53.440137, 50.061717] },
+        samara: { placemark: samaraPlacemark, coords: [53.190208, 50.086065] },
+        baptism: { placemark: baptismPlacemark, coords: [51.462245, 45.934426] },
+        kamyshin: { placemark: kamyshinPlacemark, coords: [50.079876, 45.403518] },
+        volgograd: { placemark: volgogradPlacemark, coords: [48.699137, 44.495501] },
+        first_train_trip: { placemark: firstTrainTripPlacemark, coords: [51.542137, 45.998323] },
+        rtischevo: { placemark: rtischevoPlacemark, coords: [52.260630, 43.788322] },
+        spb_april_2026: { placemark: spbApril2026Placemark, coords: [59.985777, 30.320230] },
+        michurinsk: { placemark: michurinskPlacemark, coords: [52.898243, 40.496938] }
+    };
+    const target = targets[type];
+    if (target) {
+        target.placemark.balloon.close();
+        myMap.setCenter(target.coords, 17, { duration: 500 });
+        setTimeout(() => target.placemark.balloon.open(), 500);
     }
-
-    function focusPlacemark(type) {
-        const targets = {
-            birth: { placemark: birthPlacemark, coords: [51.578517, 45.955537] },
-            home: { placemark: homePlacemark, coords: [51.529461, 46.063865] },
-            penza_zoo: { placemark: penzaZooPlacemark, coords: [53.175703, 45.002947] },
-            syzran: { placemark: syzranPlacemark, coords: [53.122451, 48.405439] },
-            kislorod: { placemark: kislorodPlacemark, coords: [53.440137, 50.061717] },
-            samara: { placemark: samaraPlacemark, coords: [53.190208, 50.086065] },
-            baptism: { placemark: baptismPlacemark, coords: [51.462245, 45.934426] },
-            kamyshin: { placemark: kamyshinPlacemark, coords: [50.079876, 45.403518] },
-            volgograd: { placemark: volgogradPlacemark, coords: [48.699137, 44.495501] }
-        };
-        const target = targets[type];
-        if (target) {
-            target.placemark.balloon.close();
-            myMap.setCenter(target.coords, 17, { duration: 500 });
-            setTimeout(() => target.placemark.balloon.open(), 500);
-        }
-    }
+}
 </script>
 </body>
 </html>
-"""
-
-# Save the updated file
-output_path = Path("/mnt/data/Карта_путешествий_Клима_с_Камышином_и_Волгоградом.html")
-output_path.write_text(updated_html, encoding="utf-8")
-
-output_path.name
