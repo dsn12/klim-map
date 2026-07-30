@@ -85,6 +85,9 @@
     <p class="location-link" onclick="focusPlacemark('spb_may_2026')">🏙 <strong>Санкт-Петербург Май</strong><br>
        ✨ Несколько дней в любимом городе — <strong>26.05–03.06.2026</strong></p>
 
+    <p class="location-link" onclick="focusPlacemark('pristannoe')">🏡 <strong>Село Пристанное</strong><br>
+       🌿 Пять летних дней в селе Пристанное ⭐ — <strong>20–25.07.2026</strong></p>
+
 
 </div>
 
@@ -92,7 +95,7 @@
 
 <script type="text/javascript">
 
-let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark, kamyshinPlacemark, volgogradPlacemark, firstTrainTripPlacemark, rtischevoPlacemark, spbApril2026Placemark, michurinskPlacemark, spbMay2026Placemark;
+let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark, kamyshinPlacemark, volgogradPlacemark, firstTrainTripPlacemark, rtischevoPlacemark, spbApril2026Placemark, michurinskPlacemark, spbMay2026Placemark, pristannoe;
 
 ymaps.ready(init);
 
@@ -173,6 +176,11 @@ function init(){
 	        balloonContent: '<strong>И снова Санкт-Петербург</strong><br>🏙 Дела, прогулки и новые открытия для всей семьи<br>С 26 мая по 03 июня 2026 года<br><a href="https://disk.yandex.ru/i/XRotqqnao4jJZQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/8qhMFGCTL5rbNQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/u5gVJNXySwG1zw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/eTP_IcU0x7Ikew" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/rWzb0xNeEHuOsg" target="_blank">📷 Фото</a>'
     }, { preset: 'islands#darkBlueIcon' });
 
+    pristannoePlacemark = new ymaps.Placemark([51.607987, 46.194282], {
+		        hintContent: 'Село Пристанное',
+		        balloonContent: '<strong>Несколько дней спокойного отдыха за городом</strong><br>🍃 Свежий воздух, прогулки и летние семейные дни<br>С 20 по 25 июля 2026 года<br><a href="https://disk.yandex.ru/i/ZH51TKSllf5C5w" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/hwVYBm3MqXjAVg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/UkOiXqMvXeaWRw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/tNynIa1hTuV54Q" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#violetIcon' });
+
     myMap.geoObjects
         .add(birthPlacemark)
         .add(homePlacemark)
@@ -187,7 +195,8 @@ function init(){
         .add(rtischevoPlacemark)
         .add(spbApril2026Placemark)
         .add(michurinskPlacemark)
-        .add(spbMay2026Placemark);
+        .add(spbMay2026Placemark)
+        .add(pristannoePlacemark);
 }
 
 function focusPlacemark(type) {
@@ -205,7 +214,8 @@ function focusPlacemark(type) {
         rtischevo: { placemark: rtischevoPlacemark, coords: [52.260630, 43.788322] },
         spb_april_2026: { placemark: spbApril2026Placemark, coords: [59.985777, 30.320230] },
         michurinsk: { placemark: michurinskPlacemark, coords: [52.898243, 40.496938] },
-        spb_may_2026: { placemark: spbMay2026Placemark, coords: [59.941393, 30.261685] }
+        spb_may_2026: { placemark: spbMay2026Placemark, coords: [59.941393, 30.261685] },
+        pristannoe: { placemark: pristannoePlacemark, coords: [51.607987, 46.194282] }
     };
     const target = targets[type];
     if (target) {
