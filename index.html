@@ -88,6 +88,12 @@
     <p class="location-link" onclick="focusPlacemark('pristannoe')">🏡 <strong>Село Пристанное</strong><br>
        🌿 Пять летних дней в селе Пристанное ⭐ — <strong>20–25.07.2026</strong></p>
 
+    <p class="location-link" onclick="focusPlacemark('Moscow2026')">🏙️ <strong>Москва — первый полёт Клима</strong><br>
+       ✈️ Первое знакомство с небом и прогулки по столице ⭐ — <strong>13-16.09.2026</strong></p>
+
+    <p class="location-link" onclick="focusPlacemark('SVOD')">😎 <strong>Второй полёт Клима. Москва - Саратов</strong><br>
+       ✈️ Весь полёт сладко проспал - опытный авиапутешественник! ⭐ — <strong>16.09.2026</strong></p>
+
 
 </div>
 
@@ -95,7 +101,7 @@
 
 <script type="text/javascript">
 
-let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark, kamyshinPlacemark, volgogradPlacemark, firstTrainTripPlacemark, rtischevoPlacemark, spbApril2026Placemark, michurinskPlacemark, spbMay2026Placemark, pristannoe;
+let myMap, birthPlacemark, homePlacemark, penzaZooPlacemark, syzranPlacemark, kislorodPlacemark, samaraPlacemark, baptismPlacemark, kamyshinPlacemark, volgogradPlacemark, firstTrainTripPlacemark, rtischevoPlacemark, spbApril2026Placemark, michurinskPlacemark, spbMay2026Placemark, pristannoePlacemark, Moscow2026Placemark, SVODPlacemark;
 
 ymaps.ready(init);
 
@@ -181,6 +187,16 @@ function init(){
 		        balloonContent: '<strong>Несколько дней спокойного отдыха за городом</strong><br>🍃 Свежий воздух, прогулки и летние семейные дни<br>С 20 по 25 июля 2026 года<br><a href="https://disk.yandex.ru/i/ZH51TKSllf5C5w" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/hwVYBm3MqXjAVg" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/UkOiXqMvXeaWRw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/tNynIa1hTuV54Q" target="_blank">📷 Фото</a>'
     }, { preset: 'islands#violetIcon' });
 
+    Moscow2026Placemark = new ymaps.Placemark([55.741334, 37.674373], {
+			        hintContent: 'Москва',
+			        balloonContent: '<strong>Первый полёт Клима и путешествие в Москву</strong><br>✈️ Летели «Победой» на борту RA-73228, а дальше - Красная площадь, ВДНХ и несколько дней знакомства со столицей<br>С 13 по 16 сентября 2026 года<br><a href="https://disk.yandex.ru/i/c1QIVkbmHAXlIQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/DdPMUW9ajl7qqA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/KYegwSe60xtAFA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/CYT4fqk5sn-_5w" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Rw9Gf5Rkqb-YkA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/evK40BZS6nkrLA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/XwOkzZJyaECFzQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/fWIgMlSuUfyraA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Mil1eny1VRv9dA" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/Sq5bh7OCZW9ylw" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/imD860btMQdjJQ" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/AoEUBMr13gWg5g" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/ZOfaHL9qZfgVAA" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#oliveIcon' });
+
+    SVODPlacemark = new ymaps.Placemark([55.962401, 37.406236], {
+	        hintContent: 'Второй полёт',
+	        balloonContent: '<strong>Второй полёт Клима</strong><br>😴 Летели «Победой» на борту RA-73230. Весь полёт сладко спал у мамы на ручках<br><a href="https://disk.yandex.ru/i/EBVdf4xOvcbY3w" target="_blank">📷 Фото</a><br><a href="https://disk.yandex.ru/i/jlbppIDF4yjxOw" target="_blank">📷 Фото</a>'
+    }, { preset: 'islands#nightIcon' });
+
     myMap.geoObjects
         .add(birthPlacemark)
         .add(homePlacemark)
@@ -196,7 +212,9 @@ function init(){
         .add(spbApril2026Placemark)
         .add(michurinskPlacemark)
         .add(spbMay2026Placemark)
-        .add(pristannoePlacemark);
+        .add(pristannoePlacemark)
+        .add(Moscow2026Placemark)
+        .add(SVODPlacemark);
 }
 
 function focusPlacemark(type) {
@@ -215,7 +233,9 @@ function focusPlacemark(type) {
         spb_april_2026: { placemark: spbApril2026Placemark, coords: [59.985777, 30.320230] },
         michurinsk: { placemark: michurinskPlacemark, coords: [52.898243, 40.496938] },
         spb_may_2026: { placemark: spbMay2026Placemark, coords: [59.941393, 30.261685] },
-        pristannoe: { placemark: pristannoePlacemark, coords: [51.607987, 46.194282] }
+        pristannoe: { placemark: pristannoePlacemark, coords: [51.607987, 46.194282] },
+        Moscow2026: { placemark: Moscow2026Placemark, coords: [55.741334, 37.674373] },
+        SVOD: { placemark: SVODPlacemark, coords: [55.962401, 37.406236] }
     };
     const target = targets[type];
     if (target) {
